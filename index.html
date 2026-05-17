@@ -50,16 +50,98 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 48px 20px 60px;
-    gap: 20px;
+    padding: 40px 20px 60px;
+    gap: 16px;
     max-width: 700px;
     margin: 0 auto;
   }
 
-  header { text-align: center; display: flex; flex-direction: column; gap: 6px; }
-  header h1 { font-size: 26px; font-weight: 600; letter-spacing: -0.5px; color: #fff; }
+  header { text-align: center; display: flex; flex-direction: column; gap: 6px; margin-bottom: 4px; }
+  header h1 { font-size: 24px; font-weight: 600; letter-spacing: -0.5px; color: #fff; }
   header p { font-size: 13px; color: var(--muted); }
 
+  /* Setup card */
+  .setup-card {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .setup-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .setup-title .badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: rgba(74,222,128,0.1);
+    color: var(--success);
+    border: 1px solid rgba(74,222,128,0.25);
+    font-weight: 500;
+  }
+
+  .setup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  @media (max-width: 480px) { .setup-grid { grid-template-columns: 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 11px; color: var(--muted); }
+
+  .field input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 12px;
+    color: var(--text);
+    font-family: monospace;
+    font-size: 13px;
+    outline: none;
+    width: 100%;
+    direction: ltr;
+  }
+
+  .field input:focus { border-color: var(--accent); }
+  .field input.ok { border-color: rgba(74,222,128,0.5); }
+
+  .save-btn {
+    padding: 9px 20px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+
+  .save-btn:active { opacity: 0.85; }
+
+  .setup-help {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .setup-help a { color: var(--accent); text-decoration: none; }
+  .setup-help a:hover { text-decoration: underline; }
+
+  /* Mode toggle */
   .mode-toggle {
     width: 100%;
     display: flex;
@@ -90,6 +172,7 @@
   .mode-btn.active { background: var(--accent); color: #fff; }
   .mode-btn:not(.active):hover { color: var(--text); background: var(--border); }
 
+  /* Expiry */
   .expiry-row {
     width: 100%;
     display: flex;
@@ -122,25 +205,13 @@
     background: rgba(251,191,36,0.08);
   }
 
-  .info-note {
-    width: 100%;
-    background: rgba(124,106,247,0.06);
-    border: 1px solid rgba(124,106,247,0.2);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-
-  .info-note b { color: var(--text); }
-
+  /* Drop zone */
   .dropzone {
     width: 100%;
     border: 2px dashed var(--border);
     border-radius: var(--radius);
     background: var(--surface);
-    padding: 44px 24px;
+    padding: 40px 24px;
     text-align: center;
     cursor: pointer;
     position: relative;
@@ -161,6 +232,7 @@
   .dz-title { font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
   .dz-sub { font-size: 12px; color: var(--muted); }
 
+  /* File list */
   .file-list { width: 100%; display: flex; flex-direction: column; gap: 8px; }
 
   .file-item {
@@ -185,7 +257,7 @@
   }
 
   .file-item .size { color: var(--muted); font-size: 11px; white-space: nowrap; }
-  .file-item .status { font-size: 18px; line-height: 1; }
+  .file-item .status { font-size: 18px; line-height: 1; min-width: 24px; text-align: center; }
 
   .file-item .remove-btn {
     background: none;
@@ -199,6 +271,7 @@
   }
   .file-item .remove-btn:hover { color: var(--error); }
 
+  /* Progress */
   .progress-bar-wrap {
     width: 100%;
     height: 3px;
@@ -216,6 +289,7 @@
     transition: width 0.2s;
   }
 
+  /* Upload button */
   .upload-btn {
     width: 100%;
     padding: 14px;
@@ -231,6 +305,7 @@
   .upload-btn:disabled { background: var(--accent-dim); cursor: not-allowed; opacity: 0.6; }
   .upload-btn:not(:disabled):active { opacity: 0.88; }
 
+  /* Results */
   .results-section { width: 100%; display: flex; flex-direction: column; gap: 10px; }
 
   .results-header {
@@ -317,6 +392,15 @@
     white-space: nowrap;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .config-saved {
+    font-size: 11px;
+    color: var(--success);
+    display: none;
+    align-items: center;
+    gap: 4px;
+  }
+  .config-saved.show { display: flex; }
 </style>
 </head>
 <body>
@@ -324,14 +408,43 @@
 
   <header>
     <h1>📁 رافع الملفات</h1>
-    <p>ارفع عدة ملفات واحصل على روابط مباشرة فوراً</p>
+    <p>يستخدم Cloudinary — رفع مباشر من المتصفح بدون مشاكل</p>
   </header>
 
+  <!-- Cloudinary Config -->
+  <div class="setup-card">
+    <div class="setup-title">
+      ⚙️ إعداد Cloudinary
+      <span class="badge">مجاني 25GB/شهر</span>
+      <span class="config-saved" id="configSaved">✓ محفوظ</span>
+    </div>
+    <div class="setup-grid">
+      <div class="field">
+        <label>Cloud Name</label>
+        <input type="text" id="cloudName" placeholder="my-cloud" dir="ltr" oninput="clearSaved()">
+      </div>
+      <div class="field">
+        <label>Upload Preset (unsigned)</label>
+        <input type="text" id="uploadPreset" placeholder="my_preset" dir="ltr" oninput="clearSaved()">
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="save-btn" onclick="saveConfig()">حفظ الإعدادات</button>
+    </div>
+    <div class="setup-help">
+      1. سجّل مجاناً على <a href="https://cloudinary.com" target="_blank">cloudinary.com</a><br>
+      2. من Dashboard انسخ الـ <b>Cloud Name</b><br>
+      3. اذهب إلى Settings → Upload → Add upload preset → اختر <b>Unsigned</b> وانسخ اسمه
+    </div>
+  </div>
+
+  <!-- Mode Toggle -->
   <div class="mode-toggle">
     <button class="mode-btn active" id="btnPermanent" onclick="setMode('permanent')">♾️ دائم</button>
     <button class="mode-btn" id="btnTemp" onclick="setMode('temp')">⏳ مؤقت</button>
   </div>
 
+  <!-- Expiry (temp mode) -->
   <div class="expiry-row" id="expiryRow" style="display:none;">
     <span class="expiry-label">ينتهي بعد:</span>
     <div class="expiry-options">
@@ -342,25 +455,26 @@
     </div>
   </div>
 
-  <div class="info-note" id="infoNote">
-    🗄️ <b>دائم:</b> يُرفع على <b>0x0.st</b> — روابط مباشرة بدون انتهاء · حد أقصى 512MB
-  </div>
-
+  <!-- Drop Zone -->
   <div class="dropzone" id="dropzone">
     <input type="file" id="fileInput" multiple>
     <span class="dz-icon">☁️</span>
     <div class="dz-title">اسحب الملفات هنا أو اضغط للاختيار</div>
-    <div class="dz-sub" id="dzSub">يدعم أي نوع ملف · حد أقصى 512MB</div>
+    <div class="dz-sub">يدعم أي نوع ملف · حد أقصى 100MB (مجاني)</div>
   </div>
 
+  <!-- File List -->
   <div class="file-list" id="fileList"></div>
 
+  <!-- Progress -->
   <div class="progress-bar-wrap" id="progressWrap">
     <div class="progress-bar" id="progressBar"></div>
   </div>
 
+  <!-- Upload Button -->
   <button class="upload-btn" id="uploadBtn" disabled>ابدأ الرفع</button>
 
+  <!-- Results -->
   <div class="results-section" id="resultsSection" style="display:none;">
     <div class="results-header">
       <div style="display:flex;align-items:center;gap:8px;">
@@ -378,40 +492,63 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  const dropzone      = document.getElementById('dropzone');
-  const fileInput     = document.getElementById('fileInput');
-  const fileListEl    = document.getElementById('fileList');
-  const uploadBtn     = document.getElementById('uploadBtn');
-  const progressWrap  = document.getElementById('progressWrap');
-  const progressBar   = document.getElementById('progressBar');
-  const resultsSection= document.getElementById('resultsSection');
-  const linksBox      = document.getElementById('linksBox');
-  const linksCount    = document.getElementById('linksCount');
-  const copyAllBtn    = document.getElementById('copyAllBtn');
-  const errMsg        = document.getElementById('errMsg');
-  const toast         = document.getElementById('toast');
-  const expiryRow     = document.getElementById('expiryRow');
-  const modeBadge     = document.getElementById('modeBadge');
-  const infoNote      = document.getElementById('infoNote');
-  const dzSub         = document.getElementById('dzSub');
+  // ── Elements ──
+  const dropzone       = document.getElementById('dropzone');
+  const fileInput      = document.getElementById('fileInput');
+  const fileListEl     = document.getElementById('fileList');
+  const uploadBtn      = document.getElementById('uploadBtn');
+  const progressWrap   = document.getElementById('progressWrap');
+  const progressBar    = document.getElementById('progressBar');
+  const resultsSection = document.getElementById('resultsSection');
+  const linksBox       = document.getElementById('linksBox');
+  const linksCount     = document.getElementById('linksCount');
+  const copyAllBtn     = document.getElementById('copyAllBtn');
+  const errMsg         = document.getElementById('errMsg');
+  const toast          = document.getElementById('toast');
+  const expiryRow      = document.getElementById('expiryRow');
+  const modeBadge      = document.getElementById('modeBadge');
+  const configSaved    = document.getElementById('configSaved');
 
   let selectedFiles = [];
   let uploadedLinks = [];
   let currentMode   = 'permanent';
   let currentExpiry = '1';
 
+  // ── Config ──
+  function saveConfig() {
+    const cn = document.getElementById('cloudName').value.trim();
+    const up = document.getElementById('uploadPreset').value.trim();
+    if (!cn || !up) { showToast('أدخل Cloud Name وUpload Preset أولاً'); return; }
+    localStorage.setItem('cld_cloud', cn);
+    localStorage.setItem('cld_preset', up);
+    document.getElementById('cloudName').classList.add('ok');
+    document.getElementById('uploadPreset').classList.add('ok');
+    configSaved.classList.add('show');
+    showToast('تم حفظ الإعدادات ✓');
+  }
+
+  function clearSaved() {
+    configSaved.classList.remove('show');
+    document.getElementById('cloudName').classList.remove('ok');
+    document.getElementById('uploadPreset').classList.remove('ok');
+  }
+
+  function loadConfig() {
+    const cn = localStorage.getItem('cld_cloud');
+    const up = localStorage.getItem('cld_preset');
+    if (cn) { document.getElementById('cloudName').value = cn; document.getElementById('cloudName').classList.add('ok'); }
+    if (up) { document.getElementById('uploadPreset').value = up; document.getElementById('uploadPreset').classList.add('ok'); }
+    if (cn && up) configSaved.classList.add('show');
+  }
+
+  loadConfig();
+
+  // ── Mode ──
   function setMode(mode) {
     currentMode = mode;
     document.getElementById('btnPermanent').classList.toggle('active', mode === 'permanent');
     document.getElementById('btnTemp').classList.toggle('active', mode === 'temp');
     expiryRow.style.display = mode === 'temp' ? 'flex' : 'none';
-    if (mode === 'permanent') {
-      infoNote.innerHTML = '🗄️ <b>دائم:</b> يُرفع على <b>0x0.st</b> — روابط مباشرة بدون انتهاء · حد أقصى 512MB';
-      dzSub.textContent = 'يدعم أي نوع ملف · حد أقصى 512MB';
-    } else {
-      infoNote.innerHTML = '⏳ <b>مؤقت:</b> يُرفع على <b>file.io</b> — الرابط يُحذف عند انتهاء المدة · حد أقصى 2GB';
-      dzSub.textContent = 'يدعم أي نوع ملف · حد أقصى 2GB';
-    }
   }
 
   function setExpiry(btn, val) {
@@ -420,6 +557,7 @@
     btn.classList.add('active');
   }
 
+  // ── Drag & Drop ──
   dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('over'); });
   dropzone.addEventListener('dragleave', () => dropzone.classList.remove('over'));
   dropzone.addEventListener('drop', e => {
@@ -474,10 +612,19 @@
     renderFileList();
   }
 
+  // ── Upload ──
   uploadBtn.addEventListener('click', startUpload);
 
   async function startUpload() {
+    const cloudName   = document.getElementById('cloudName').value.trim();
+    const uploadPreset= document.getElementById('uploadPreset').value.trim();
+
+    if (!cloudName || !uploadPreset) {
+      showToast('أدخل Cloud Name وUpload Preset أولاً ⬆️');
+      return;
+    }
     if (!selectedFiles.length) return;
+
     uploadBtn.disabled = true;
     uploadedLinks = [];
     errMsg.textContent = '';
@@ -503,9 +650,7 @@
       const f = selectedFiles[i];
       setStatus(i, '⏳');
       try {
-        const url = currentMode === 'permanent'
-          ? await upload0x0(f)
-          : await uploadFileIo(f, currentExpiry);
+        const url = await uploadToCloudinary(f, cloudName, uploadPreset);
         uploadedLinks.push({ name: f.name, url });
         setStatus(i, '✅');
       } catch (e) {
@@ -522,28 +667,35 @@
     uploadBtn.disabled = false;
   }
 
-  async function upload0x0(file) {
+  async function uploadToCloudinary(file, cloudName, uploadPreset) {
     const form = new FormData();
     form.append('file', file);
-    let res;
-    try { res = await fetch('https://0x0.st', { method: 'POST', body: form }); }
-    catch { throw new Error('تعذّر الاتصال بـ 0x0.st'); }
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const text = (await res.text()).trim();
-    if (!text.startsWith('http')) throw new Error(text || 'رد غير متوقع');
-    return text;
-  }
+    form.append('upload_preset', uploadPreset);
 
-  async function uploadFileIo(file, days) {
-    const form = new FormData();
-    form.append('file', file);
+    // للمؤقت: نضيف إعداد انتهاء الصلاحية (بالثواني)
+    if (currentMode === 'temp') {
+      const seconds = parseInt(currentExpiry) * 24 * 60 * 60;
+      form.append('invalidate', 'true');
+      // Cloudinary لا يدعم انتهاء الصلاحية التلقائي في المجاني
+      // نضيف tag للتمييز فقط
+      form.append('tags', 'temp_' + currentExpiry + 'd');
+    } else {
+      form.append('tags', 'permanent');
+    }
+
     let res;
-    try { res = await fetch('https://file.io/?expires=' + days + 'd', { method: 'POST', body: form }); }
-    catch { throw new Error('تعذّر الاتصال بـ file.io'); }
-    if (!res.ok) throw new Error('HTTP ' + res.status);
+    try {
+      res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
+        method: 'POST',
+        body: form
+      });
+    } catch (e) {
+      throw new Error('تعذّر الاتصال بـ Cloudinary');
+    }
+
     const json = await res.json();
-    if (!json.success || !json.link) throw new Error(json.message || 'رد غير متوقع');
-    return json.link;
+    if (!res.ok || json.error) throw new Error(json.error?.message || 'HTTP ' + res.status);
+    return json.secure_url;
   }
 
   function setStatus(i, icon) {
@@ -589,7 +741,7 @@
   function showToast(msg) {
     toast.textContent = msg;
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2200);
+    setTimeout(() => toast.classList.remove('show'), 2500);
   }
 </script>
 </body>
